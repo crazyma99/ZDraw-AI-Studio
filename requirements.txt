@@ -1,0 +1,24 @@
+#1.基础依赖
+torch>=2.0.0
+torchvision
+torchaudio
+gradio>=4.0.0
+transformers
+accelerate
+protobuf
+sentencepiece
+huggingface_hub
+safetensors
+modelscope
+
+#2.Diffusers 需要从 GitHub 源码安装以支持 Z-Image 的最新特性
+
+
+diffusers @ git+https://github.com/huggingface/diffusers.git
+
+#3. Web 服务库 (FastAPI 套件)
+fastapi
+uvicorn
+python-multipart
+aiofiles
+websockets
