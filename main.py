@@ -40,8 +40,8 @@ class LoraConfig(BaseModel):
 class GenerateRequest(BaseModel):
     prompt: str
     negative_prompt: str = ""
-    steps: int = 8
-    cfg: float = 0.0
+    steps: int = 9 # 官方推荐 9 步 (实际执行 8 次 DiT forwards)
+    cfg: float = 0.0 # Turbo 模型推荐 0.0
     width: int = 1024
     height: int = 1024
     seed: int = -1

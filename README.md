@@ -1,7 +1,14 @@
-# Z-Image Studio
+# ZDraw AI Studio
 
 ## 1. 介绍
-Z-Image Studio 是一个基于 [Tongyi-MAI/Z-Image-Turbo](https://modelscope.cn/models/Tongyi-MAI/Z-Image-Turbo) 模型的本地 AI 绘画工作站。它集成了高性能的推理引擎和直观的 Web 界面，支持文本生成图像（Text-to-Image）及 LoRA 模型扩展。
+ZDraw AI Studio 是一个基于 [Tongyi-MAI/Z-Image-Turbo](https://modelscope.cn/models/Tongyi-MAI/Z-Image-Turbo) 模型的本地 AI 绘画工作站。它集成了高性能的推理引擎和直观的 Web 界面，支持文本生成图像（Text-to-Image）及 LoRA 模型扩展。
+
+### 界面预览
+<div align="center">
+   <img src="gui_shot/3.png" width="30%" alt="HEADER">
+   <img src="gui_shot/1.png" width="30%" alt="WebUI 界面">
+   <img src="gui_shot/2.png" width="30%" alt="生成效果">
+</div>
 
 项目特点：
 - **高性能**：基于 Turbo 模型，支持 8 步快速推理。
@@ -32,7 +39,21 @@ Z-Image Studio 是一个基于 [Tongyi-MAI/Z-Image-Turbo](https://modelscope.cn/
    pip install -r requirements.txt
    ```
 
-3. **启动服务**
+3. **(可选) 安装 Flash Attention 加速**
+   Flash Attention 可以显著提高推理速度并减少显存占用。
+   
+   *   **官方仓库**: [Dao-AILab/flash-attention](https://github.com/Dao-AILab/flash-attention)
+   *   **安装方法**:
+       请确保已安装 CUDA Toolkit（通常在 PyTorch 安装时包含，或者需要单独安装完整的 CUDA 开发包）。
+       ```bash
+       pip install flash-attn --no-build-isolation
+       ```
+       *注意：在 Windows 上编译可能较为复杂，建议寻找对应 Python 和 CUDA 版本的预编译 whl 包进行安装。*
+
+   *   **自动启用**:
+       本项目已内置自动检测机制。只要成功安装了 `flash-attn`，程序启动时会自动检测并启用 `Flash Attention 3` (优先) 或 `Flash Attention 2`。
+
+4. **启动服务**
    ```bash
    python main.py
    ```

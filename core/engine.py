@@ -62,12 +62,17 @@ class ZImageEngine:
             if torch.backends.mps.is_available(): torch.mps.empty_cache()
 
         try:
+            # 使用 modelscope 的 ZImagePipeline 加载
             self.pipe = DiffusionPipeline.from_pretrained(
                 config.MODEL_PATH,
                 torch_dtype=self.dtype,
+                low_cpu_mem_usage=False,
                 trust_remote_code=True,
             )
             self.pipe.to(self.device)
+
+            # [新增] 自动检测并启用 Flash Attention
+            self._enable_flash_attention()
             
             self.lora_merger = LoRAMerger(self.pipe)
             self.current_lora_applied = False
@@ -81,6 +86,36 @@ class ZImageEngine:
         except Exception as e:
             print(f"❌ [Engine] 加载失败: {e}")
             return False, str(e)
+
+    def _enable_flash_attention(self):
+        """自动检测并启用 Flash Attention"""
+        if self.device != "cuda":
+            return
+
+        try:
+            import flash_attn
+            # 检测 Flash Attention 版本
+            version = getattr(flash_attn, "__version__", "0.0.0")
+            print(f"⚡ [Engine] 检测到 Flash Attention v{version}")
+            
+            # 尝试启用 Flash Attention 3 (如果支持)
+            try:
+                # 假设 _flash_3 是一个可选后端，先尝试设置
+                # 注意：具体名称可能取决于 diffusers/transformers 版本，这里按照用户提示尝试
+                self.pipe.transformer.set_attention_backend("_flash_3")
+                print("⚡ [Engine] 已启用 Flash Attention 3")
+            except Exception:
+                # 回退到 Flash Attention 2
+                try:
+                    self.pipe.transformer.set_attention_backend("flash")
+                    print("⚡ [Engine] 已启用 Flash Attention 2")
+                except Exception as e:
+                    print(f"⚠️ [Engine] 启用 Flash Attention 失败: {e}")
+                    
+        except ImportError:
+            print("⚠️ [Engine] 未检测到 flash_attn 库，将使用默认 Attention 后端 (SDPA)")
+        except Exception as e:
+            print(f"⚠️ [Engine] Flash Attention 检测过程出错: {e}")
 
     def _apply_optimizations(self):
         """应用优化策略"""
