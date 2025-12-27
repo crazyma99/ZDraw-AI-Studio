@@ -11,8 +11,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # 基础模型路径 (请确保该路径下包含完整的 diffusers 模型文件)
 MODEL_PATH = os.path.join(BASE_DIR, "Z-Image-Turbo")
 
-# LoRA 文件路径 (保留用于向后兼容或默认值，但实际逻辑将使用 LORA_DIR)
-LORA_PATH = os.path.join(BASE_DIR, "Technically_Color_Z_Image_Turbo_v1_renderartist_2000.safetensors")
 # 新增：LoRA 目录
 LORA_DIR = os.path.join(BASE_DIR, "loras")
 
@@ -26,8 +24,8 @@ os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 os.makedirs(LORA_DIR, exist_ok=True)
 
 # --- 默认生成参数 ---
-DEFAULT_PROMPT = "A cinematic shot of a cyberpunk city, neon lights, rain, high detail, 8k"
-DEFAULT_NEGATIVE_PROMPT = "cartoon, painting, 3d render, low poly, blurry, low quality, distorted, ugly, watermark"
+DEFAULT_PROMPT = ""
+DEFAULT_NEGATIVE_PROMPT = ""
 
 # 尺寸与步数
 DEFAULT_STEPS = 8      # Turbo 模型推荐步数
