@@ -8,11 +8,13 @@ ZDraw AI Studio 是一个基于 [Tongyi-MAI/Z-Image-Turbo](https://modelscope.cn
    <img src="gui_shot/1.png" width="100%" alt="WebUI 界面">
 </div>
 
-项目特点：
+### 项目特点
 - **高性能**：基于 Turbo 模型，支持 8 步快速推理。
 - **本地化**：完全本地运行，保护隐私。
 - **易用性**：一键启动 WebUI，无需复杂配置。
 - **自动管理**：支持运行时自动下载缺失的模型文件。
+- **LoRA支持**：支持LoRA权重加载。
+- **显存优化**：自动启用Flash Attention加速，降低显存占用。
 
 ## 2. 本地部署方案
 

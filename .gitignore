@@ -26,12 +26,6 @@ __pycache__/
 # Mac 系统文件
 .DS_Store
 
-# VS Code 配置 (个人偏好设置不应上传)
-.vscode/
-
-# PyCharm 配置
-.idea/
-
 # 日志文件
 *.log
 
