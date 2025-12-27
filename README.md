@@ -5,9 +5,9 @@ ZDraw AI Studio 是一个基于 [Tongyi-MAI/Z-Image-Turbo](https://modelscope.cn
 
 ### 界面预览
 <div align="center">
-   <img src="gui_shot/3.png" width="30%" alt="HEADER">
-   <img src="gui_shot/1.png" width="30%" alt="WebUI 界面">
-   <img src="gui_shot/2.png" width="30%" alt="生成效果">
+   <img src="gui_shot/3.png" width="100%" alt="HEADER">
+   <img src="gui_shot/1.png" width="50%" alt="WebUI 界面">
+   <img src="gui_shot/2.png" width="50%" alt="生成效果">
 </div>
 
 项目特点：
